@@ -4,7 +4,7 @@
 
 	if($_POST) {
 		// check for our required fields
-		if(!$_POST['Name'] || !$_POST['Latitude'] || !$_POST['Longitude']) {
+		if(!$_POST['Name'] || !$_POST['Latitude'] || !$_POST['Longitude'] || !$_POST['GoogleID']) {
 			echo "Check required fields";
 			exit();
 		}
@@ -16,9 +16,10 @@
 		$safe_name = mysqli_real_escape_string($mysqli, $_POST['Name']);
 		$safe_latitude = mysqli_real_escape_string($mysqli, $_POST['Latitude']);
 		$safe_longitude = mysqli_real_escape_string($mysqli, $_POST['Longitude']);
+		$safe_google_id = mysqli_real_escape_string($mysqli, $_POST['GoogleID']);
 		
 		// insert user into database
-		$add_player_query = "INSERT INTO Player (Name, Latitude, Longitude) values ('" . $safe_name . "', '" . $safe_latitude . "', '" . $safe_longitude . "')";
+		$add_player_query = "INSERT INTO Player (Name, Latitude, Longitude, GoogleID) values ('" . $safe_name . "', '" . $safe_latitude . "', '" . $safe_longitude . "', '" . $safe_google_id . "')";
 
 		$add_player_response = mysqli_query($mysqli, $add_player_query) or die(mysqli_error($mysqli));
 
