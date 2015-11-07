@@ -28,8 +28,11 @@ CREATE TABLE `Game` (
   `GameType` varchar(255) DEFAULT NULL,
   `MinimumTagDistance` float DEFAULT NULL,
   `MinimumHintDistance` float DEFAULT NULL,
-  `ImmunityTime` int(11) DEFAULT NULL,
-  PRIMARY KEY (`ID`)
+  `ImmunityTime` time DEFAULT NULL,
+  `It` int(11) DEFAULT NULL,
+  PRIMARY KEY (`ID`),
+  KEY `It` (`It`),
+  CONSTRAINT `Game_ibfk_1` FOREIGN KEY (`It`) REFERENCES `Player` (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -108,4 +111,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-11-07 13:07:58
+-- Dump completed on 2015-11-07 14:23:36
