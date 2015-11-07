@@ -23,7 +23,7 @@
 
 		$add_player_response = mysqli_query($mysqli, $add_player_query) or die(mysqli_error($mysqli));
 
-		// get user ID
+		// get player ID
 		$player_id = mysqli_insert_id($mysqli);
 
 		// echo records added
