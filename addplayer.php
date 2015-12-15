@@ -4,7 +4,7 @@
 
 	if($_POST) {
 		// check for our required fields
-		if(!$_POST['Name'] || !$_POST['GoogleID'] || !$_POST['Latitude'] || !$_POST['Longitude']) {
+		if(!$_POST['Name']) {
 			echo "Check required fields";
 			exit();
 		}
