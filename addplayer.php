@@ -17,10 +17,9 @@
 		$safe_latitude = mysqli_real_escape_string($mysqli, $_POST['Latitude']);
 		$safe_longitude = mysqli_real_escape_string($mysqli, $_POST['Longitude']);
 		$safe_google_id = mysqli_real_escape_string($mysqli, $_POST['GoogleID']);
-		$safe_game_id = mysqli_real_escape_string($mysqli, $_POST['LastGameID']);
 		
 		// insert user into database
-		$add_player_query = "INSERT INTO Player (Name, Latitude, Longitude, GoogleID, LastGameID) values ('" . $safe_name . "', '" . $safe_latitude . "', '" . $safe_longitude . "', '" . $safe_google_id . "', '" . $safe_game_id . "')";
+		$add_player_query = "INSERT INTO Player (Name, Latitude, Longitude, GoogleID) values ('" . $safe_name . "', '" . $safe_latitude . "', '" . $safe_longitude . "', '" . $safe_google_id . "')";
 
 		$add_player_response = mysqli_query($mysqli, $add_player_query) or die(mysqli_error($mysqli));
 

@@ -60,7 +60,7 @@ CREATE TABLE `Player` (
   `GoogleID` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`ID`),
   KEY `GoogleIDIndex` (`GoogleID`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -69,7 +69,7 @@ CREATE TABLE `Player` (
 
 LOCK TABLES `Player` WRITE;
 /*!40000 ALTER TABLE `Player` DISABLE KEYS */;
-INSERT INTO `Player` VALUES (1,'Nathan Reline',0,0,'116912744736380502344');
+INSERT INTO `Player` VALUES (2,'Nathan',0,0,'');
 /*!40000 ALTER TABLE `Player` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -111,4 +111,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-11-07 14:23:36
+-- Dump completed on 2015-12-14 20:04:24
