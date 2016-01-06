@@ -14,6 +14,7 @@
         $get_game_response = mysqli_query($mysqli, $get_game_query) or die(mysqli_error($mysqli));
  
         $get_lasttagged_query = "SELECT LastTagged FROM Player_Game WHERE ID = " . $safe_game_id . " AND PlayerGoogleID = " . $safe_google_id;
+	echo $get_lasttagged_query . "<br>";
         $get_lasttagged_response = mysqli_query($mysqli, $get_lasttagged_query) or die(mysqli_error($mysqli));
 
         $gamedata = "";

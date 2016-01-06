@@ -20,6 +20,7 @@ include 'common.php';
            
         // update
         $edit_player_query = "UPDATE Player SET Latitude = '" . $safe_latitude . "', Longitude = '" . $safe_longitude . "' WHERE GoogleID = " . $safe_google_id;
+	echo $edit_player_query . "<br>";
         $edit_player_response = mysqli_query($mysqli, $edit_player_query) or die(mysqli_error($mysqli));
 
         mysqli_free_result($edit_player_response);
