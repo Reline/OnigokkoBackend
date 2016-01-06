@@ -23,7 +23,6 @@ include 'common.php';
            
         // update
         $edit_game_query = "UPDATE Game SET Name = '" . $safe_name . "', GameType = '" . $safe_type . "', MinimumTagDistance = '" . $safe_tag_distance . "', MinimumHintDistance = '" . $safe_hint_distance . "', ImmunityTime = '" . $safe_immunity_time . "', It = '" . $safe_it . "' WHERE ID = " . $safe_id;
-	echo $edit_game_query . "<br>";
         $edit_game_response = mysqli_query($mysqli, $edit_game_query) or die(mysqli_error($mysqli));
 
         mysqli_free_result($edit_game_response);

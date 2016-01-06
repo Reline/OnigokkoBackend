@@ -20,7 +20,6 @@
 		
 		// insert user into database
 		$add_player_query = "INSERT INTO Player (Name, Latitude, Longitude, GoogleID) values ('" . $safe_name . "', '" . $safe_latitude . "', '" . $safe_longitude . "', '" . $safe_google_id . "')";
-		echo $add_player_query . "<br>";
 		$add_player_response = mysqli_query($mysqli, $add_player_query) or die(mysqli_error($mysqli));
 
 		// get player ID

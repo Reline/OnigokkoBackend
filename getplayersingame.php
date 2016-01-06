@@ -10,7 +10,6 @@
 
 	// get players in a certain game
 	$get_players_query = "SELECT * FROM Player WHERE GoogleID = (SELECT GoogleID FROM Player_Game WHERE GameID = " . $safe_game_id . ")";
-	echo $get_players_query . "<br>";
 	$get_players_response = mysqli_query($mysqli, $get_players_query) or die(mysqli_error($mysqli));
 
 	// JSONArray

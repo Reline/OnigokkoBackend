@@ -10,7 +10,6 @@
 
 	// get every game that our player is participating in
 	$get_games_query = "SELECT * FROM Game WHERE GameID = (SELECT GameID FROM Player_Game WHERE Player = " . $safe_google_id . ")";
-	echo $get_games_query . "<br>";
 	$get_games_response = mysqli_query($mysqli, $get_games_query) or die(mysqli_error($mysqli));
 	
 	// place all of our queried games into an array
