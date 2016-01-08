@@ -28,12 +28,12 @@ CREATE TABLE `Game` (
   `GameType` varchar(255) DEFAULT NULL,
   `MinimumTagDistance` float DEFAULT NULL,
   `MinimumHintDistance` float DEFAULT NULL,
-  `ImmunityTime` time DEFAULT NULL,
+  `ImmunityTime` float DEFAULT NULL,
   `It` int(11) DEFAULT NULL,
   PRIMARY KEY (`ID`),
   KEY `It` (`It`),
   CONSTRAINT `Game_ibfk_1` FOREIGN KEY (`It`) REFERENCES `Player` (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -42,6 +42,7 @@ CREATE TABLE `Game` (
 
 LOCK TABLES `Game` WRITE;
 /*!40000 ALTER TABLE `Game` DISABLE KEYS */;
+INSERT INTO `Game` VALUES (20,'Hello World','GameType',666,666,666,NULL);
 /*!40000 ALTER TABLE `Game` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -60,7 +61,7 @@ CREATE TABLE `Player` (
   `GoogleID` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`ID`),
   KEY `GoogleIDIndex` (`GoogleID`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -69,7 +70,7 @@ CREATE TABLE `Player` (
 
 LOCK TABLES `Player` WRITE;
 /*!40000 ALTER TABLE `Player` DISABLE KEYS */;
-INSERT INTO `Player` VALUES (2,'Nathan',0,0,'');
+INSERT INTO `Player` VALUES (13,'Nathan Reline',0,0,'116912744736380502344');
 /*!40000 ALTER TABLE `Player` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -90,7 +91,7 @@ CREATE TABLE `Player_Game` (
   KEY `PlayerGoogleID` (`PlayerGoogleID`),
   CONSTRAINT `Player_Game_ibfk_2` FOREIGN KEY (`GameID`) REFERENCES `Game` (`ID`),
   CONSTRAINT `Player_Game_ibfk_3` FOREIGN KEY (`PlayerGoogleID`) REFERENCES `Player` (`GoogleID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -99,6 +100,7 @@ CREATE TABLE `Player_Game` (
 
 LOCK TABLES `Player_Game` WRITE;
 /*!40000 ALTER TABLE `Player_Game` DISABLE KEYS */;
+INSERT INTO `Player_Game` VALUES (9,20,NULL,'116912744736380502344');
 /*!40000 ALTER TABLE `Player_Game` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -111,4 +113,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-12-14 20:04:24
+-- Dump completed on 2016-01-07 19:03:51
