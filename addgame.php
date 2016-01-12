@@ -22,7 +22,7 @@
 		// $safe_it = mysqli_real_escape_string($mysqli, $_POST['It']);
 
 		// insert game into database
-		$add_game_query = "INSERT INTO Game (Name, GameType, MinimumTagDistance, MinimumHintDistance, ImmunityTime) values ('" . $safe_name . "', '" . $safe_type . "', '" . $safe_tag_distance . "', '" . $safe_hint_distance . "', '" . $safe_immunity_time . "')";
+		$add_game_query = "INSERT INTO Game (Name, GameType, MinimumTagDistance, MinimumHintDistance, ImmunityTime, Owner) values ('" . $safe_name . "', '" . $safe_type . "', '" . $safe_tag_distance . "', '" . $safe_hint_distance . "', '" . $safe_immunity_time . "', '" . $safe_player_id . "')";
 		$add_game_response = mysqli_query($mysqli, $add_game_query) or die(mysqli_error($mysqli));
 		
 		// get game id

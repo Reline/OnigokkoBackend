@@ -11,7 +11,7 @@
         // $safe_google_id = mysqli_real_escape_string($mysqli, $_GET['PlayerGoogleID']);
  
         $get_game_query = "SELECT * FROM Game WHERE ID = " . $safe_game_id;
-	echo "$get_game_query";
+	// echo "$get_game_query";
         $get_game_response = mysqli_query($mysqli, $get_game_query) or die(mysqli_error($mysqli));
  
         // $get_lasttagged_query = "SELECT LastTagged FROM Player_Game WHERE ID = " . $safe_game_id . " AND PlayerGoogleID = " . $safe_google_id;
