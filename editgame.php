@@ -4,10 +4,10 @@ include 'common.php';
     if($_POST) {
         
         // check for required fields
-        if(!$_POST['ID'] || !$_POST['Name'] || !$_POST['GameType'] || !$_POST['MinimumTagDistance'] || $_POST['MinimumHintDistance'] || $_POST['ImmunityTime'] || $_POST['It']) {
+        /**if(!$_POST['ID'] || !$_POST['Name'] || !$_POST['GameType'] || !$_POST['MinimumTagDistance'] || $_POST['MinimumHintDistance'] || $_POST['ImmunityTime'] || $_POST['It']) {
             echo "Check required fields";
             exit();
-        }
+        }**/
         
         //connect to DB
         connectToDB();
