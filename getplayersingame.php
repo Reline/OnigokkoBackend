@@ -9,7 +9,7 @@
 	$safe_game_id = mysqli_real_escape_string($mysqli, $_GET['GameID']);
 
 	// get players in a certain game
-	$get_players_query = "SELECT * FROM Player WHERE GoogleID = (SELECT GoogleID FROM Player_Game WHERE GameID = " . $safe_game_id . ")";
+	$get_players_query = "SELECT DISTINCT Player.* FROM Player JOIN Player_Game WHERE Player_Game.GameID = " . $safe_game_id . ")";
 	$get_players_response = mysqli_query($mysqli, $get_players_query) or die(mysqli_error($mysqli));
 
 	// JSONArray

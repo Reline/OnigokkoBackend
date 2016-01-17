@@ -3,7 +3,7 @@
 define("DB_HOST", "localhost");
 define("DB_NAME", "tag");
 define("DB_USER", "root");
-define("DB_PASS", "");
+define("DB_PASS", "mysql");
 
 function connectToDB() {
 	global $mysqli;
