@@ -13,7 +13,7 @@ function connectToDB() {
 	$mysqli = mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_NAME);
 	// if connection fails, stop the script
 	if(mysqli_connect_errno()) {
-		printf("Connection failed: %s\n", msyqli_connect_error($mysqli));
+		printf("Connection failed: %s\n", mysqli_connect_error($mysqli));
 		exit();
 	}
 }
