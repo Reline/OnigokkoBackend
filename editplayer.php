@@ -3,8 +3,8 @@ header("Content-Type: text/html; charset=utf-8");
 include 'common.php';
     if($_POST) {
         
-        // check for required fields
-        if(!$_POST['Name'] || !$_POST['Latitude'] || !$_POST['Longitude'] || !$_POST['GoogleID']) {
+        // check for required fields; only the longitude and latitude can be changed, googleid used as identifier
+        if(!$_POST['Latitude'] || !$_POST['Longitude'] || !$_POST['GoogleID']) {
             echo "Check required fields";
             exit();
         }
@@ -13,7 +13,6 @@ include 'common.php';
         connectToDB();
         
         //get input & clean them
-        $safe_name = mysqli_real_escape_string($mysqli, $_POST['Name']);
         $safe_latitude = mysqli_real_escape_string($mysqli, $_POST['Latitude']);
         $safe_longitude = mysqli_real_escape_string($mysqli, $_POST['Longitude']);
         $safe_google_id = mysqli_real_escape_string($mysqli, $_POST['GoogleID']);

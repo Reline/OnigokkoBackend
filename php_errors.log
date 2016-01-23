@@ -1,5 +1,0 @@
-[17-Jan-2016 19:27:05 America/New_York] PHP Warning:  mysqli_free_result() expects parameter 1 to be mysqli_result, boolean given in /var/www/html/tag/joingame.php on line 16
-[17-Jan-2016 19:28:01 America/New_York] PHP Warning:  mysqli_free_result() expects parameter 1 to be mysqli_result, boolean given in /var/www/html/tag/joingame.php on line 16
-[17-Jan-2016 20:01:47 America/New_York] PHP Warning:  mysqli_free_result() expects parameter 1 to be mysqli_result, boolean given in /var/www/html/tag/joingame.php on line 16
-[17-Jan-2016 20:03:11 America/New_York] PHP Warning:  mysqli_free_result() expects parameter 1 to be mysqli_result, boolean given in /var/www/html/tag/joingame.php on line 16
-[17-Jan-2016 20:07:54 America/New_York] PHP Warning:  mysqli_free_result() expects parameter 1 to be mysqli_result, boolean given in /var/www/html/tag/joingame.php on line 16
