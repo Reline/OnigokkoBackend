@@ -19,10 +19,9 @@ include 'common.php';
         $safe_tag_distance = mysqli_real_escape_string($mysqli, $_POST['MinimumTagDistance']);
         $safe_hint_distance = mysqli_real_escape_string($mysqli, $_POST['MinimumHintDistance']);
         $safe_immunity_time = mysqli_real_escape_string($mysqli, $_POST['ImmunityTime']);
-        $safe_it = mysqli_real_escape_string($mysqli, $_POST['It']);
            
         // update
-        $edit_game_query = "UPDATE Game SET Name = '" . $safe_name . "', GameType = '" . $safe_type . "', MinimumTagDistance = '" . $safe_tag_distance . "', MinimumHintDistance = '" . $safe_hint_distance . "', ImmunityTime = '" . $safe_immunity_time . "', It = '" . $safe_it . "' WHERE ID = " . $safe_id;
+        $edit_game_query = "UPDATE Game SET Name = '" . $safe_name . "', GameType = '" . $safe_type . "', MinimumTagDistance = '" . $safe_tag_distance . "', MinimumHintDistance = '" . $safe_hint_distance . "', ImmunityTime = '" . $safe_immunity_time . "' WHERE ID = " . $safe_id;
         $edit_game_response = mysqli_query($mysqli, $edit_game_query) or die(mysqli_error($mysqli));
 
         mysqli_free_result($edit_game_response);
