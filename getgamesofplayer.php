@@ -6,7 +6,7 @@
 
 	$safe_google_id = mysqli_real_escape_string($mysqli, $_GET['PlayerGoogleID']);
 
-	$get_games_query = "SELECT DISTINCT Game.* FROM Game JOIN Player_Game WHERE Player_Game.PlayerGoogleID = " . $safe_google_id;
+	$get_games_query = "SELECT DISTINCT Game.* FROM Game JOIN Player_Game WHERE Player_Game.PlayerGoogleID = " . $safe_google_id . " AND Game.ID = Player_Game.GameID";
 	$get_games_response = mysqli_query($mysqli, $get_games_query) or die(mysqli_error($mysqli));
 
 	$gamedata = '[';
