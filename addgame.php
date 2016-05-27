@@ -3,9 +3,9 @@
 	include 'common.php';
 	
 	if($_POST) {
-		// check for required fields: Name, GameType, MinimumTagDistance, MinimumHintDistance, ImmunityTime
-		if(!$_POST['Name']) { // || !$_POST['GameType'] || !$_POST['MinimumTagDistance'] || $_POST['MinimumHintDistance'] || $_POST['ImmunityTime'] || $_POST['It']) {
-			echo "Check required fields";
+		// check for required fields: Name, MinimumTagDistance, MinimumHintDistance, ImmunityTime
+		if(!$_POST['Name'] || !$_POST['MinimumTagDistance'] || $_POST['MinimumHintDistance'] || $_POST['ImmunityTime']) {
+			echo "Check required fields.";
 			exit();
 		}
 
@@ -19,21 +19,19 @@
 		$safe_hint_distance = mysqli_real_escape_string($mysqli, $_POST['MinimumHintDistance']);
 		$safe_immunity_time = mysqli_real_escape_string($mysqli, $_POST['ImmunityTime']);
 		$safe_player_id = mysqli_real_escape_string($mysqli, $_POST['PlayerGoogleID']);
-		// $safe_it = mysqli_real_escape_string($mysqli, $_POST['It']);
+		// StartTime
+		// Duration
 
 		// insert game into database
-		$add_game_query = "INSERT INTO Game (Name, GameType, MinimumTagDistance, MinimumHintDistance, ImmunityTime, Owner) values ('" . $safe_name . "', '" . $safe_type . "', '" . $safe_tag_distance . "', '" . $safe_hint_distance . "', '" . $safe_immunity_time . "', '" . $safe_player_id . "')";
+		$add_game_query = "INSERT INTO Game (Name, GameType, MinimumTagDistance, MinimumHintDistance, ImmunityTime, Owner) values ('$safe_name', '$safe_type', '$safe_tag_distance', '$safe_hint_distance', '$safe_immunity_time', '$safe_player_id')";
 		$add_game_response = mysqli_query($mysqli, $add_game_query) or die(mysqli_error($mysqli));
 		
 		// get game id
 		$game_id = mysqli_insert_id($mysqli);
 		
-		// echo records added
-		echo "$add_game_query";
-		// echo "Game $game_id added.";
-
-		$bridge_query = "INSERT INTO Player_Game (GameID, PlayerGoogleID) values ('" . $game_id. "', '" . $safe_player_id . "')";
-		echo " $bridge_query";
+		// relate player and game in bridge table
+		$bridge_query = "INSERT INTO Player_Game (GameID, PlayerGoogleID) values ('$game_id', '$safe_player_id')";
+		echo "$bridge_query";
 		$bridge_response = mysqli_query($mysqli, $bridge_query) or die(mysqli_error($mysqli));
 		
 		mysqli_free_result($add_game_response);

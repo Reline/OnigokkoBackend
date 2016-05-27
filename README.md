@@ -1,2 +1,2 @@
-# TagBackend
-PHP scripts and possibly SQL entries for the Tag Android application
+# Onigokko Backend
+PHP scripts and SQL entries for [Tag! You're It!] (github.com/Reline/Onigokko)

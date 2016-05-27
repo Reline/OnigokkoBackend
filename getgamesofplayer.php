@@ -2,13 +2,20 @@
 	header("Content-Type: application/json; charset=utf-8");
 	include 'common.php';
 
+	// check for required fields
+    if(!$_GET['PlayerGoogleID']) {
+        echo "PlayerGoogleID field is required.";
+        exit();
+    }
+
 	connectToDB();
 
 	$safe_google_id = mysqli_real_escape_string($mysqli, $_GET['PlayerGoogleID']);
 
-	$get_games_query = "SELECT DISTINCT Game.* FROM Game JOIN Player_Game WHERE Player_Game.PlayerGoogleID = " . $safe_google_id . " AND Game.ID = Player_Game.GameID";
+	$get_games_query = "SELECT DISTINCT Game.* FROM Game JOIN Player_Game WHERE Player_Game.PlayerGoogleID = '$safe_google_id' AND Game.ID = Player_Game.GameID";
 	$get_games_response = mysqli_query($mysqli, $get_games_query) or die(mysqli_error($mysqli));
 
+	// place the games retrieved into a json array
 	$gamedata = '[';
 	while($row = mysqli_fetch_assoc($get_games_response)) {
 		$gamedata .= json_encode($row) . ",";
