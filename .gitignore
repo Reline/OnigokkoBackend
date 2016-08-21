@@ -1,3 +1,5 @@
 php_errors.log
 bin/
 push-notifications
+pkg
+go-sql-driver
