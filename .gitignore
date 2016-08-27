@@ -1,7 +1,5 @@
 php_errors.log
 pkg
 bin
-src/github.com
 push-notifications
-pkg
 go-sql-driver
