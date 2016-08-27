@@ -1,3 +1,5 @@
 php_errors.log
-bin/
+pkg
+bin
+src/github.com
 push-notifications
