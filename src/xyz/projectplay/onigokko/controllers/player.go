@@ -37,7 +37,6 @@ func (pc PlayerController) CreatePlayer(w http.ResponseWriter, r *http.Request, 
 		fmt.Fprintf(w, "%s\n", err)
 		return
 	}
-	defer r.Body.Close()
 	err = dao.InsertPlayer(p)
 	if err != nil {
 		w.WriteHeader(http.StatusConflict)
