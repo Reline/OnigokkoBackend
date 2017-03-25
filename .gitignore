@@ -2,6 +2,7 @@
 *.o
 *.a
 *.so
+main
 
 # Folders
 _obj
@@ -31,3 +32,9 @@ vendor/
 
 # libraries
 github.com
+cloud.google.com
+golang.org
+google.golang.org
+
+# Gogland
+.idea

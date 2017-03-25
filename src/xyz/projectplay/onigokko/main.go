@@ -20,7 +20,7 @@ func main() {
 		"/etc/letsencrypt/live/projectplay.xyz/privkey.pem", r))
 }
 
-func hello(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
+func hello(w http.ResponseWriter, _ *http.Request, _ httprouter.Params) {
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
 	fmt.Fprint(w, "Hello, World!\n")
