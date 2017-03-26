@@ -20,8 +20,14 @@ func main() {
 		"/etc/letsencrypt/live/projectplay.xyz/privkey.pem", r))
 }
 
-func hello(w http.ResponseWriter, _ *http.Request, _ httprouter.Params) {
+func hello(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
+	fmt.Print("Hello from " + r.RemoteAddr + "\n")
+	token := r.Header.Get("Token")
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
-	fmt.Fprint(w, "Hello, World!\n")
+	if token != "" {
+		fmt.Fprint(w, "I got your token, it was "+token+"\n")
+	} else {
+		fmt.Fprint(w, "You didn't send me a token...\n")
+	}
 }
