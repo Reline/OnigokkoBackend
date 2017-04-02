@@ -5,9 +5,9 @@ import _ "github.com/go-sql-driver/mysql"
 import "database/sql"
 import "xyz/projectplay/onigokko/models"
 
-type DatabaseAccessObject interface {
-	IsValidToken(token string) bool
-	InsertPlayer(p models.Player) error
+type AccessObject interface {
+	GetPlayer(id string) (models.Player, error)
+	InsertPlayer(id string, p models.Player) error
 	Close()
 }
 
@@ -32,12 +32,30 @@ func NewSQLDao() *SQLDao {
 	return dao
 }
 
-func (dao SQLDao) IsValidToken(token string) bool {
-	return true
+func (dao SQLDao) GetPlayer(id string) (models.Player, error) {
+	stmt, err := dao.db.Prepare("SELECT Player WHERE ID = ?")
+	if err != nil {
+		return nil, err
+	}
+	defer stmt.Close()
+	row := stmt.QueryRow(id)
+	var p models.Player
+	var lat sql.NullFloat64
+	var lng sql.NullFloat64
+	err = row.Scan(&p.Id, &p.Name, &lat, &lng)
+	if err != nil {
+		return nil, err
+	}
+	if lat.Valid && lng.Valid {
+		p.Latitude = lat.Float64
+		p.Longitude = lng.Float64
+	}
+	return p, nil
 }
 
-func (dao SQLDao) InsertPlayer(p models.Player) error {
-	_, err := dao.db.Exec("INSERT INTO Player (ID, Name) VALUES ('" + p.Id + "','" + p.Name + "')")
+func (dao SQLDao) InsertPlayer(id string, p models.Player) error {
+	_, err := dao.db.Exec("INSERT INTO Player (ID, Name) VALUES " +
+		"('" + id + "','" + p.Name + "')")
 	return err
 }
 

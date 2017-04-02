@@ -1,6 +1,7 @@
 package controllers
 
 import "fmt"
+import "strconv"
 import "net/http"
 import "encoding/json"
 import "github.com/julienschmidt/httprouter"
@@ -9,38 +10,50 @@ import "xyz/projectplay/onigokko/models"
 
 type PlayerController struct{}
 
-var dao database.DatabaseAccessObject
-
 func NewPlayerController() *PlayerController {
-	dao = database.NewSQLDao()
 	return &PlayerController{}
 }
 
 func (pc PlayerController) GetPlayer(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
-	token := r.Header.Get("Token")
-	if dao.IsValidToken(token) {
+	tokenInfo, err := authenticateToken(w, r)
+	if err == nil {
+		dao := database.NewSQLDao()
+		defer dao.Close()
+		player, err := dao.GetPlayer(tokenInfo.UserId)
+		if err != nil {
+			w.WriteHeader(http.StatusNotFound)
+			return
+		}
 		w.Header().Set("Content-Type", "application/json")
 		w.WriteHeader(http.StatusOK)
-		id := p.ByName("id")
-		fmt.Fprintf(w, "{\"player\": \""+id+"\"}")
-	} else {
-		w.WriteHeader(http.StatusUnauthorized)
+		fmt.Fprintf(w,
+			"{"+
+				"\"id\": \""+player.Id+"\","+
+				"\"name\": \""+player.Name+"\","+
+				"\"latitude\": \""+strconv.FormatFloat(player.Latitude, 'f', -1, 64)+"\","+
+				"\"longitude\": \""+strconv.FormatFloat(player.Longitude, 'f', -1, 64)+"\""+
+				"}")
 	}
 }
 
-func (pc PlayerController) CreatePlayer(w http.ResponseWriter, r *http.Request, params httprouter.Params) {
-	decoder := json.NewDecoder(r.Body)
-	var p models.Player
-	err := decoder.Decode(&p)
-	if err != nil {
-		w.WriteHeader(http.StatusBadRequest)
-		fmt.Fprintf(w, "%s\n", err)
-		return
-	}
-	err = dao.InsertPlayer(p)
-	if err != nil {
-		w.WriteHeader(http.StatusConflict)
-		fmt.Fprintf(w, "This record already exists.\n")
-		return
+func (pc PlayerController) CreatePlayer(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
+	tokenInfo, err := authenticateToken(w, r)
+	if err == nil {
+		decoder := json.NewDecoder(r.Body)
+		var p models.Player
+		err = decoder.Decode(&p)
+		if err != nil {
+			w.WriteHeader(http.StatusBadRequest)
+			return
+		}
+		defer r.Body.Close()
+		dao := database.NewSQLDao()
+		defer dao.Close()
+		err = dao.InsertPlayer(tokenInfo.UserId, p)
+		if err != nil {
+			w.WriteHeader(http.StatusConflict)
+			return
+		}
+		w.WriteHeader(http.StatusCreated)
 	}
 }
