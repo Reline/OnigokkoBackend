@@ -1,0 +1,97 @@
+{
+  "swagger" : "2.0",
+  "host" : "projectplay.xyz",
+  "basePath" : "/onigokko",
+  "info" : {
+    "description" : "API for Onigokko",
+    "version" : "1.0.1",
+    "title" : "Onigokko",
+    "license" : {
+      "name" : "MIT",
+      "url" : "https://opensource.org/licenses/MIT"
+    }
+  },
+  "paths" : {
+    "/player" : {
+      "get" : {
+        "summary" : "retrieves player",
+        "operationId" : "GetPlayer",
+        "description" : "Gets a Player in the system",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "header",
+          "name" : "Token",
+          "description" : "session token for validation purposes",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "requested player",
+            "schema" : {
+              "$ref" : "#/definitions/Player"
+            }
+          },
+          "401" : {
+            "description" : "invalid token"
+          },
+          "404" : {
+            "description" : "player not found"
+          }
+        }
+      },
+      "post" : {
+        "summary" : "creates player",
+        "operationId" : "CreatePlayer",
+        "description" : "Adds a new Player to the system",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "text/plain" ],
+        "parameters" : [ {
+          "in" : "header",
+          "name" : "Token",
+          "description" : "session token for validation purposes",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "player",
+          "description" : "Player to create",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/Player"
+          }
+        } ],
+        "responses" : {
+          "201" : {
+            "description" : "player created"
+          },
+          "400" : {
+            "description" : "bad request"
+          },
+          "401" : {
+            "description" : "invalid token"
+          },
+          "409" : {
+            "description" : "player already exists"
+          }
+        }
+      }
+    }
+  },
+  "definitions" : {
+    "Player" : {
+      "type" : "object",
+      "required" : [ "id", "name" ],
+      "properties" : {
+        "id" : {
+          "type" : "integer",
+          "example" : 116912744736380502344
+        },
+        "name" : {
+          "type" : "string",
+          "example" : "Nathan Reline"
+        }
+      }
+    }
+  }
+}
