@@ -6,10 +6,7 @@ import "net/http"
 import "encoding/json"
 import "github.com/julienschmidt/httprouter"
 import "xyz/projectplay/onigokko/database"
-import (
-	"log"
-	"xyz/projectplay/onigokko/models"
-)
+import "xyz/projectplay/onigokko/models"
 
 type PlayerController struct{}
 
