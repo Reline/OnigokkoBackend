@@ -7,7 +7,7 @@ import "xyz/projectplay/onigokko/models"
 
 type AccessObject interface {
 	GetPlayer(id string) (models.Player, error)
-	InsertPlayer(id string, p models.Player) error
+	InsertPlayer(id string, name string) error
 	Close()
 }
 
@@ -32,19 +32,18 @@ func NewSQLDao() *SQLDao {
 	return dao
 }
 
-func (dao SQLDao) GetPlayer(id string) (models.Player, error) {
+func (dao SQLDao) GetPlayer(id string) (p models.Player, err error) {
 	stmt, err := dao.db.Prepare("SELECT Player WHERE ID = ?")
 	if err != nil {
-		return nil, err
+		return p, err
 	}
 	defer stmt.Close()
 	row := stmt.QueryRow(id)
-	var p models.Player
 	var lat sql.NullFloat64
 	var lng sql.NullFloat64
 	err = row.Scan(&p.Id, &p.Name, &lat, &lng)
 	if err != nil {
-		return nil, err
+		return p, err
 	}
 	if lat.Valid && lng.Valid {
 		p.Latitude = lat.Float64
@@ -53,9 +52,9 @@ func (dao SQLDao) GetPlayer(id string) (models.Player, error) {
 	return p, nil
 }
 
-func (dao SQLDao) InsertPlayer(id string, p models.Player) error {
+func (dao SQLDao) InsertPlayer(id string, name string) error {
 	_, err := dao.db.Exec("INSERT INTO Player (ID, Name) VALUES " +
-		"('" + id + "','" + p.Name + "')")
+		"('" + id + "','" + name + "')")
 	return err
 }
 

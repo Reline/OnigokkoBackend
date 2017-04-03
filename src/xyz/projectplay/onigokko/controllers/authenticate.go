@@ -2,20 +2,22 @@ package controllers
 
 import "fmt"
 import "net/http"
+import "log"
+import "errors"
 import "google.golang.org/api/oauth2/v2"
 
 func authenticateToken(w http.ResponseWriter, r *http.Request) (*oauth2.Tokeninfo, error) {
 	token := r.Header.Get("Token")
-	if token != "" {
-		oauth2Service, err := oauth2.New(&http.Client{})
-		tokenInfoCall := oauth2Service.Tokeninfo()
-		tokenInfoCall.IdToken(token)
+	oauth2Service, err := oauth2.New(&http.Client{})
+	if err == nil {
+		tokenInfo, err := oauth2Service.Tokeninfo().IdToken(token).Do()
 		if err == nil {
-			return tokenInfoCall.Do()
+			return tokenInfo, err
 		}
 	}
-	err := error("Invalid Token")
+	err = errors.New("Invalid Token: [" + token + "]")
 	w.WriteHeader(http.StatusUnauthorized)
-	fmt.Fprint(w, err)
+	fmt.Fprint(w, err.Error())
+	log.Println(err.Error())
 	return nil, err
 }

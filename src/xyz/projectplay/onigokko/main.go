@@ -3,12 +3,16 @@ package main
 import "log"
 import "net/http"
 import "github.com/julienschmidt/httprouter"
-import "xyz/projectplay/onigokko/controllers"
+import (
+	"xyz/projectplay/onigokko/controllers"
+	"xyz/projectplay/onigokko/database"
+)
 
 func main() {
 	r := httprouter.New()
 
-	pc := controllers.NewPlayerController()
+	dao := database.NewSQLDao()
+	pc := controllers.NewPlayerController(dao)
 
 	r.GET("/onigokko/player", pc.GetPlayer)
 	r.POST("/onigokko/player", pc.CreatePlayer)
