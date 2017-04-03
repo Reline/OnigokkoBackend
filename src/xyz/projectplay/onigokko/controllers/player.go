@@ -23,18 +23,17 @@ func (pc PlayerController) GetPlayer(w http.ResponseWriter, r *http.Request, _ h
 		p, err := dao.GetPlayer(tokenInfo.UserId)
 		if err != nil {
 			w.WriteHeader(http.StatusNotFound)
-			fmt.Fprint(w, err)
+			fmt.Fprint(w, err.Error())
 			return
 		}
 		w.Header().Set("Content-Type", "application/json")
 		w.WriteHeader(http.StatusOK)
-		j := "{" +
-			"\"id\": " + p.Id + "," +
-			"\"name\": \"" + p.Name + "\"," +
-			"\"latitude\": " + strconv.FormatFloat(p.Latitude, 'f', -1, 64) + "," +
-			"\"longitude\": " + strconv.FormatFloat(p.Longitude, 'f', -1, 64) +
-			"}"
-		fmt.Fprintf(w, j)
+		fmt.Fprintf(w, "{"+
+			"\"id\": "+p.Id+","+
+			"\"name\": \""+p.Name+"\","+
+			"\"latitude\": "+strconv.FormatFloat(p.Latitude, 'f', -1, 64)+","+
+			"\"longitude\": "+strconv.FormatFloat(p.Longitude, 'f', -1, 64)+
+			"}")
 	}
 }
 

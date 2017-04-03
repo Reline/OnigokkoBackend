@@ -3,10 +3,8 @@ package main
 import "log"
 import "net/http"
 import "github.com/julienschmidt/httprouter"
-import (
-	"xyz/projectplay/onigokko/controllers"
-	"xyz/projectplay/onigokko/database"
-)
+import "xyz/projectplay/onigokko/controllers"
+import "xyz/projectplay/onigokko/database"
 
 func main() {
 	r := httprouter.New()

@@ -15,9 +15,8 @@ func authenticateToken(w http.ResponseWriter, r *http.Request) (*oauth2.Tokeninf
 			return tokenInfo, err
 		}
 	}
-	err = errors.New("Invalid Token: [" + token + "]")
+	err = errors.New("Invalid Token: " + token)
 	w.WriteHeader(http.StatusUnauthorized)
 	fmt.Fprint(w, err.Error())
-	log.Println(err.Error())
 	return nil, err
 }
